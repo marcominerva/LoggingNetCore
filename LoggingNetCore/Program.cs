@@ -17,6 +17,7 @@ namespace LoggingNetCore
                 .ConfigureLogging(logging =>
                 {
                     logging.AddProvider(new FileSystemLoggerProvider());
+                    logging.AddNotepad();
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

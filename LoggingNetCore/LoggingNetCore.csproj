@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Notepad.Extensions.Logging" Version="1.0.2" />
+  </ItemGroup>
+
 </Project>
