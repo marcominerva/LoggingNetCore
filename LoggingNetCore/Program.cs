@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Serilog;
-using System.Diagnostics;
 
 namespace LoggingNetCore
 {
@@ -27,10 +26,10 @@ namespace LoggingNetCore
                 {
                     loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration);
 
-                    Serilog.Debugging.SelfLog.Enable(msg =>
-                    {
-                        Debug.Print(msg);
-                    });
+                    //Serilog.Debugging.SelfLog.Enable(msg =>
+                    //{
+                    //    Debug.Print(msg);
+                    //});
                 });
     }
 }
