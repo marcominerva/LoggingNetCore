@@ -1,0 +1,3 @@
+[submodule "XamarinNetCore"]
+	path = XamarinNetCore
+	url = https://github.com/marcominerva/XamarinNetCore.git
