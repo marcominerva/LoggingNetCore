@@ -1,7 +1,7 @@
-using LoggingNetCore.Logging;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Serilog;
+using System.Diagnostics;
 
 namespace LoggingNetCore
 {
@@ -14,14 +14,23 @@ namespace LoggingNetCore
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureLogging(logging =>
-                {
-                    logging.AddProvider(new FileSystemLoggerProvider());
-                    logging.AddNotepad();
-                })
+                //.ConfigureLogging(logging =>
+                //{
+                //    logging.AddProvider(new FileSystemLoggerProvider());
+                //    logging.AddNotepad();
+                //})
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                })
+                .UseSerilog((hostingContext, loggerConfiguration) =>
+                {
+                    loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration);
+
+                    Serilog.Debugging.SelfLog.Enable(msg =>
+                    {
+                        Debug.Print(msg);
+                    });
                 });
     }
 }
