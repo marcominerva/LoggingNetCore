@@ -30,7 +30,7 @@ namespace WpfWeatherApp
             ServiceProvider = host.Services;
         }
 
-        private void ConfigureServices(HostBuilderContext context, IServiceCollection services)
+        private static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
         {
             var appSettingsSection = context.Configuration.GetSection(nameof(AppSettings));
             var appSettings = appSettingsSection.Get<AppSettings>();
@@ -45,24 +45,12 @@ namespace WpfWeatherApp
             services.AddSingleton<MainWindow>();
         }
 
-        protected override async void OnStartup(StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
-            await host.StartAsync();
-
             var mainWindow = host.Services.GetRequiredService<MainWindow>();
             mainWindow.Show();
 
             base.OnStartup(e);
-        }
-
-        protected override async void OnExit(ExitEventArgs e)
-        {
-            using (host)
-            {
-                await host.StopAsync(TimeSpan.FromSeconds(5));
-            }
-
-            base.OnExit(e);
         }
     }
 }
