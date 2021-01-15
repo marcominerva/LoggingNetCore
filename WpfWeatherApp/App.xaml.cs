@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using System;
+using System.Diagnostics;
 using System.Windows;
 using WpfWeatherApp.Settings;
 
@@ -24,6 +25,11 @@ namespace WpfWeatherApp
                 .UseSerilog((hostingContext, loggerConfiguration) =>
                 {
                     loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration);
+
+                    Serilog.Debugging.SelfLog.Enable(message =>
+                    {
+                        Debug.WriteLine(message);
+                    });
                 })
                 .Build();
 
